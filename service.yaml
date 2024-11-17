@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: telegram-bot
+  name: blum-payload-generator-service
+  labels:
+    app: blum-payload-generator
+spec:
+  selector:
+    app: blum-payload-generator
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9876
+  type: ClusterIP

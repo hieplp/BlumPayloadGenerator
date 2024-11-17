@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blum-payload-generator-deployment
+  namespace: telegram-bot
+  labels:
+    app: blum-payload-generator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blum-payload-generator
+  template:
+    metadata:
+      labels:
+        app: blum-payload-generator
+    spec:
+      nodeSelector:
+        node-role.kubernetes.io/worker: "true"
+      dnsPolicy: Default
+      containers:
+        - name: blum-payload-generator
+          image: hieplp/blum-payload-generator:latest
+          ports:
+            - containerPort: 9876
